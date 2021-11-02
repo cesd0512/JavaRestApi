@@ -11,8 +11,8 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.javainuse.dao.UserDao;
-import com.javainuse.model.DAOUser;
-import com.javainuse.model.UserDTO;
+import com.javainuse.model.Usuario;
+import com.javainuse.instance.UsuarioInstancia;
 
 @Service
 public class JwtUserDetailsService implements UserDetailsService {
@@ -25,7 +25,7 @@ public class JwtUserDetailsService implements UserDetailsService {
 
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-		DAOUser user = userDao.findByUsername(username);
+		Usuario user = userDao.findByUsername(username);
 		if (user == null) {
 			throw new UsernameNotFoundException("User not found with username: " + username);
 		}
@@ -33,8 +33,8 @@ public class JwtUserDetailsService implements UserDetailsService {
 				new ArrayList<>());
 	}
 
-	public DAOUser save(UserDTO user) {
-		DAOUser newUser = new DAOUser();
+	public Usuario save(UsuarioInstancia user) {
+		Usuario newUser = new Usuario();
 		newUser.setUsername(user.getUsername());
 		newUser.setCorreo(user.getCorreo());
 		newUser.setNombre(user.getNombre());

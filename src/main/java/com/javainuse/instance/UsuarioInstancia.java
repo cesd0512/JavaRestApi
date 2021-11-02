@@ -1,6 +1,7 @@
-package com.javainuse.model;
+package com.javainuse.instance;
 
-public class UserDTO {
+
+public class UsuarioInstancia {
 	private String username;
 	private String nombre;
 	private String correo;

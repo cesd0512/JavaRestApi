@@ -20,7 +20,7 @@ import com.javainuse.service.JwtUserDetailsService;
 import com.javainuse.config.JwtTokenUtil;
 import com.javainuse.model.JwtRequest;
 import com.javainuse.model.JwtResponse;
-import com.javainuse.model.UserDTO;
+import com.javainuse.instance.UsuarioInstancia;
 
 @RestController
 @CrossOrigin
@@ -49,7 +49,7 @@ public class JwtAuthenticationController {
 	}
 
 	@RequestMapping(value = "/register", method = RequestMethod.POST)
-	public ResponseEntity<?> saveUser(@RequestBody UserDTO user) throws Exception {
+	public ResponseEntity<?> saveUser(@RequestBody UsuarioInstancia user) throws Exception {
 		return ResponseEntity.ok(userDetailsService.save(user));
 	}
 

@@ -7,11 +7,11 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name = "usuarios")
-public class DAOUser {
+public class Usuario {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private long id;
+	private int id;
 	@Column
 	private String username;
 	@Column
@@ -66,4 +66,20 @@ public class DAOUser {
 		this.nombre = nombre;
 	}
 
+
+	/**
+	* Returns value of id
+	* @return
+	*/
+	public int getId() {
+		return id;
+	}
+
+	/**
+	* Sets new value of id
+	* @param
+	*/
+	public void setId(int id) {
+		this.id = id;
+	}
 }

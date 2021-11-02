@@ -5,14 +5,13 @@ import java.util.Date;
 import javax.persistence.*;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-
 @Entity
 @Table(name = "equipos")
 public class Equipo {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private long id;
+	private int id;
 	@Column
 	private String nombre;
 
@@ -30,4 +29,19 @@ public class Equipo {
 		this.nombre = nombre;
 	}
 
+
+	/**
+	* Default empty Equipo constructor
+	*/
+	public Equipo() {
+		super();
+	}
+
+	/**
+	* Default Equipo constructor
+	*/
+	public Equipo(String nombre) {
+		super();
+		this.nombre = nombre;
+	}
 }
