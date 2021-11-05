@@ -10,7 +10,6 @@ import java.util.List;
 import com.javainuse.model.Usuario;
 import com.javainuse.instance.UsuarioInstancia;
 import com.javainuse.service.UsuarioService;
-import com.javainuse.service.UsuarioService;
 import com.javainuse.instance.MensajeInstancia;
 
 //Notación para indicar que es un controlador de tipo Rest

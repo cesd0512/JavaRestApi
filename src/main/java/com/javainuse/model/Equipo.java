@@ -29,6 +29,18 @@ public class Equipo {
 		this.nombre = nombre;
 	}
 
+	public int getId() {
+		return id;
+	}
+
+	/**
+	* Sets new value of id
+	* @param
+	*/
+	public void setId(int id) {
+		this.id = id;
+	}
+
 
 	/**
 	* Default empty Equipo constructor

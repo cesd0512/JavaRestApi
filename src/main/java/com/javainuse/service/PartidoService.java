@@ -2,6 +2,7 @@ package com.javainuse.service;
 
 import com.javainuse.dao.PartidoDao;
 import com.javainuse.model.Partido;
+import com.javainuse.model.Usuario;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -31,6 +32,10 @@ public class PartidoService {
 
     public Optional<Partido> getPartido(int idPartido){
         return  partidoDao.findById(idPartido);
+    }
+
+    public Iterable<Partido> getPartidoUsuario(Usuario usuario){
+        return  partidoDao.findAllByUsuario(usuario);
     }
 
     public void savePartido(Partido partido){

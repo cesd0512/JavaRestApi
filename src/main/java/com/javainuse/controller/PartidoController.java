@@ -18,7 +18,7 @@ import com.javainuse.instance.MensajeInstancia;
 @RequestMapping("/partido")
 //URL que permitimos que consuman nuestras APIS
 //En caso de querer permitir todos los origentes ponemos en lugar de la URL un *
-@CrossOrigin(origins = "*")
+@CrossOrigin(origins = "http://localhost:3000")
 public class PartidoController {
 
     @Autowired
@@ -45,6 +45,14 @@ public class PartidoController {
 
         Partido partido = partidoService.getPartido(idPartido).get();
         return new ResponseEntity(partido, HttpStatus.OK);
+    }
+
+    @GetMapping("/usuarioPartidos/{idUsuario}")
+    public ResponseEntity<Partido> partidoByUsuario(@PathVariable("idUsuario") int idUsuario){
+
+        Usuario usuario = usuarioService.getUsuario(idUsuario).get();
+        Iterable<Partido> partidos = partidoService.getPartidoUsuario(usuario);
+        return new ResponseEntity(partidos, HttpStatus.OK);
     }
 
 		@PostMapping("/crearPartido")

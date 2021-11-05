@@ -15,15 +15,19 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import com.javainuse.service.JwtUserDetailsService;
+import org.springframework.http.HttpStatus;
 
 
 import com.javainuse.config.JwtTokenUtil;
 import com.javainuse.model.JwtRequest;
 import com.javainuse.model.JwtResponse;
+import com.javainuse.model.Usuario;
 import com.javainuse.instance.UsuarioInstancia;
+import com.javainuse.instance.MensajeInstancia;
+import com.javainuse.service.UsuarioService;
 
 @RestController
-@CrossOrigin
+@CrossOrigin(origins = "http://localhost:3000")
 public class JwtAuthenticationController {
 
 	@Autowired
@@ -35,6 +39,9 @@ public class JwtAuthenticationController {
 	@Autowired
 	private JwtUserDetailsService userDetailsService;
 
+	@Autowired
+    UsuarioService usuarioService;
+
 	@RequestMapping(value = "/authenticate", method = RequestMethod.POST)
 	public ResponseEntity<?> createAuthenticationToken(@RequestBody JwtRequest authenticationRequest) throws Exception {
 
@@ -43,13 +50,16 @@ public class JwtAuthenticationController {
 		final UserDetails userDetails = userDetailsService
 				.loadUserByUsername(authenticationRequest.getUsername());
 
+		final Usuario usuario = usuarioService.getByUsername(authenticationRequest.getUsername());
 		final String token = jwtTokenUtil.generateToken(userDetails);
 
-		return ResponseEntity.ok(new JwtResponse(token));
+		return ResponseEntity.ok(new JwtResponse(token, usuario.getUsername(), usuario.getId()));
 	}
 
 	@RequestMapping(value = "/register", method = RequestMethod.POST)
 	public ResponseEntity<?> saveUser(@RequestBody UsuarioInstancia user) throws Exception {
+		if (user.getUsername() != null && usuarioService.getByUsername(user.getUsername()) != null)
+            return new ResponseEntity(new MensajeInstancia("El username del usuario ya existe"), HttpStatus.NOT_FOUND);
 		return ResponseEntity.ok(userDetailsService.save(user));
 	}
 
